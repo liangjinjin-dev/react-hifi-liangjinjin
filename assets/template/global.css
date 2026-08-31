@@ -1,0 +1,39 @@
+:root{
+  --serif: 'Huiwen-mincho', 'Songti SC', serif;
+  --accent-gold: #B8935A;
+  --bg-page: #F7F4EE;
+  --bg-card: #FFFFFF;
+  --text-primary: #1A1A1A;
+  --text-tertiary: #C4BFB5;
+  --dark-card: #1A1A1A;
+  --radius-card: 16px;
+  --gap: 12px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 子集字体：把 assets/fonts/HuiwenMincho.subset.woff2 放到同结构路径下 */
+@font-face{
+  font-family: 'Huiwen-mincho';
+  src: url('./fonts/HuiwenMincho.subset.woff2') format('woff2');
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+body{
+  margin: 0;
+  font-family: var(--serif);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  line-height: 1.7;
+}
+
+/* 移动底部 Tabbar 激活态（金色底白字） */
+.tabbar{ position: fixed; bottom: 0; left: 0; right: 0; display: flex;
+  padding-bottom: var(--safe-bottom); background: var(--bg-card); border-top: 1px solid #eee; }
+.tabbar button{ flex: 1; border: 0; background: transparent; padding: 12px 0; font-family: var(--serif); }
+.tabbar button.active{ background: var(--accent-gold); color: #fff; font-weight: 700; }
+
+/* PC 侧边栏（≥768px）：白底在白侧栏上隐形，必须用金色底 */
+@media (min-width: 768px){
+  .pc-side button.active{ background: var(--accent-gold); color: #fff; font-weight: 700; }
+}
