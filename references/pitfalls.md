@@ -44,3 +44,12 @@
 ## 9. useEffect 死循环（草稿持久化）
 - 草稿 useEffect 若把 `session` 放进依赖 → store 更新 → 新引用 → effect 重燃 → 死循环
 - 解决：依赖只放草稿内容字段（skillsSel / knowSel / ...），不放 `session`
+
+## 10. 模板是平铺结构设计（2026-09 实测发现）
+- 现象：`assets/template/index.html` 用相对路径引用 `./main.jsx`、`./global.css`；若按 Vite 默认 `src/` 结构放置，构建报 `Could not resolve "./main.jsx" from "index.html"`
+- 解决：模板文件必须平铺在同一目录（`index.html` / `global.css` / `main.jsx` / `fonts/` 同级），`main.jsx` 里的 `./pages/Home` 也相对该目录解析
+- 模板 README 的"覆盖 src/ 下文件"表述易误导，已在新 README 强调
+
+## 11. XHS 脚本为实战固化（2026-09 实测发现）
+- 现象：`build_xhs.cjs` / `scan_xhs.cjs` / `smoke_xhs.cjs` 是从「天赋挖掘机」项目固化的范例，硬编码项目源码路径（`src/main.jsx`、`src/styles/`、`public/figures`）、输出目录（`/tmp/te-xhs-esbuild`）与本机依赖路径（`/Users/.../Desktop/AIworkspace/.../node_modules/esbuild`、`puppeteer-core`、`/Users/.../.workbuddy/binaries/.../python3`）
+- 解决：复用前必须改为你自己项目的路径与依赖；仅作为 XHS 构建流程的参考实现，不是开箱即用的通用工具

@@ -9,11 +9,15 @@
 - `fonts/` — 把 `../fonts/HuiwenMincho.subset.woff2` 复制到这里（或改 `@font-face` 路径）
 
 ## 起步
+> ⚠ 模板是**平铺结构**：`index.html` 用相对路径引用 `./main.jsx`、`./global.css`，这 4 个文件必须平铺在同一目录（`index.html` / `global.css` / `main.jsx` / `fonts/` 同级），`main.jsx` 里的 `./pages/Home` 也相对该目录解析。**不要**按 Vite 默认 `src/` 结构放置，否则构建报 `Could not resolve "./main.jsx" from "index.html"`。
+
 ```bash
 npm create vite@latest my-app -- --template react
 cd my-app
 npm install react-router-dom zustand
-# 用本目录的 index.html / global.css / main.jsx 覆盖，并建立 src/pages/Home.jsx
+# 1. 用本目录的 index.html / global.css / main.jsx 平铺覆盖项目根目录
+# 2. 把 fonts/ 放到与它们同级
+# 3. 在 pages/Home.jsx 建起步页（main.jsx 已 import './pages/Home'）
 npm run dev
 ```
 
